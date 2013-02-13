@@ -2,6 +2,8 @@
 
 Support multiple lines ellipsis
 
+[http://plugins.jquery.com/ellipsis/](http://plugins.jquery.com/ellipsis/)
+
 ## Usage
 
 Fit one line
