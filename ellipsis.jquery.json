@@ -2,9 +2,10 @@
     "name": "ellipsis",
     "title": "jQuery ellipsis",
     "description": "Support multiple lines ellipsis",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "author": {
         "name": "Kenji Abe",
+        "email": "kenji.01.star@gmail.com",
         "url": "https://github.com/STAR-ZERO"
     },
     "dependencies": {
