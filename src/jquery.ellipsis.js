@@ -1,10 +1,3 @@
-/*!
- * jquery-ellipsis
- *
- * Copyright (c) Kenji Abe.
- * https://github.com/STAR-ZERO/jquery-ellipsis
- * Under The MIT License
- */
 (function($) {
     $.fn.ellipsis = function(options) {
 
@@ -31,6 +24,8 @@
             // 省略するかのフラグ
             var flag = false;
 
+            var height = 0;
+
             for (var i = 0; i < text.length; i++) {
 
                 // 1文字ずつ取得
@@ -38,9 +33,9 @@
                 // テキストを足していく
                 $this.text($this.text() + s);
                 // 現在の高さを取得
-                var height = $this.height();
+                height = $this.height();
 
-                if (height != 0 && height != rowHeight) {
+                if (height !== 0 && height !== rowHeight) {
                     // 高さが0意外かつ前回の高さと異なる場合
                     // 今の高さを保持
                     rowHeight = height;

@@ -2,9 +2,10 @@
     "name": "ellipsis",
     "title": "jQuery ellipsis",
     "description": "Support multiple lines ellipsis",
-    "version": "1.0.5",
+    "version": "1.0.7",
     "author": {
         "name": "Kenji Abe",
+        "email": "kenji.01.star@gmail.com",
         "url": "https://github.com/STAR-ZERO"
     },
     "dependencies": {
@@ -12,10 +13,10 @@
     },
     "licenses": [{
         "type": "MIT",
-        "url": "https://github.com/STAR-ZERO/jquery-ellipsis/blob/master/LICENSE"}
+        "url": "https://github.com/STAR-ZERO/jquery-ellipsis/blob/master/LICENSE-MIT"}
     ],
-    "files": ["js/jquery.ellipsis.js"],
     "keywords": ["ellipsis", "show"],
+    "bugs": "https://github.com/STAR-ZERO/jquery-ellipsis/issues",
     "homepage": "https://github.com/STAR-ZERO/jquery-ellipsis",
     "docs": "https://github.com/STAR-ZERO/jquery-ellipsis"
 }
