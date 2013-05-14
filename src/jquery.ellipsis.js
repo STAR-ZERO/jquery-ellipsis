@@ -30,11 +30,7 @@
             var end = text.length;
 
             while (start < end) {
-                var length = Math.floor((start + end) / 2);
-
-                if (start === length) {
-                    break;
-                }
+                var length = Math.ceil((start + end) / 2);
 
                 $this.text(text.slice(0, length) + options['char']);
 
