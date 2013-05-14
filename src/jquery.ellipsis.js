@@ -14,13 +14,16 @@
             var $this = $(this);
             var text = $this.text();
             var origHeight = $this.height();
+
             // 1行分の高さを取得
             $this.text('a');
             var rowHeight = $this.height();
             var targetHeight = rowHeight * options.row;
 
-            if (origHeight <= targetHeight)
+            if (origHeight <= targetHeight) {
+                $this.text(text);
                 return;
+            }
 
             // Binary search for max length
             var start = 1;
