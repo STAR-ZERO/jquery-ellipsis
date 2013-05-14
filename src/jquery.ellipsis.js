@@ -10,67 +10,39 @@
         options = $.extend(defaults, options);
 
         this.each(function() {
-
             // 現在のテキストを取得
             var $this = $(this);
             var text = $this.text();
+            var origHeight = $this.height();
             // 1行分の高さを取得
             $this.text('a');
             var rowHeight = $this.height();
-            // 一旦すべて空にする
-            $this.text('');
-            // 行数カウント
-            var rowCount = 1;
-            // 省略するかのフラグ
-            var flag = false;
+            var targetHeight = rowHeight * options.row;
 
-            var height = 0;
+            if (origHeight <= targetHeight)
+                return;
 
-            for (var i = 0; i < text.length; i++) {
+            // Binary search for max length
+            var start = 1;
+            var end = text.length;
 
-                // 1文字ずつ取得
-                var s = text.substring(i, i + 1);
-                // テキストを足していく
-                $this.text($this.text() + s);
-                // 現在の高さを取得
-                height = $this.height();
+            while (start < end) {
+                var length = Math.floor((start + end) / 2);
 
-                if (height !== 0 && height !== rowHeight) {
-                    // 高さが0意外かつ前回の高さと異なる場合
-                    // 今の高さを保持
-                    rowHeight = height;
-                    // 行数インクリメント
-                    rowCount++;
+                if (start == length)
+                    break;
 
-                    // 指定の行数を超えた時に終了
-                    if (rowCount > options.row) {
-                        flag = true;
-                        break;
-                    }
-                }
+                $this.text(text.slice(0, length) + options.char);
+
+                if ($this.height () <= targetHeight)
+                    start = length;
+                else
+                    end = length - 1;
             }
 
-            if (flag) {
-
-                text = $this.text();
-
-                while (true) {
-
-                    // 1文字ずつ減らしながら行数を見ていく
-                    text = text.substring(0, text.length - 1);
-                    $this.text(text + options.char);
-                    height = $this.height();
-
-                    if (height < rowHeight) {
-                        break;
-                    }
-                }
-            }
-
+            $this.text(text.slice(0, start) + options.char);
         });
 
         return this;
-    };
-
-})(jQuery);
-
+    }
+}) (jQuery)
