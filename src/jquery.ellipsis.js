@@ -32,20 +32,22 @@
             while (start < end) {
                 var length = Math.floor((start + end) / 2);
 
-                if (start == length)
+                if (start === length) {
                     break;
+                }
 
                 $this.text(text.slice(0, length) + options['char']);
 
-                if ($this.height () <= targetHeight)
+                if ($this.height () <= targetHeight) {
                     start = length;
-                else
+                } else {
                     end = length - 1;
+                }
             }
 
             $this.text(text.slice(0, start) + options['char']);
         });
 
         return this;
-    }
-}) (jQuery)
+    };
+}) (jQuery);
