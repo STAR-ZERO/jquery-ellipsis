@@ -3,8 +3,8 @@
 
         // デフォルトオプション
         var defaults = {
-            row : 1, // 省略行数
-            char : '...' // 省略文字
+            'row' : 1, // 省略行数
+            'char' : '...' // 省略文字
         };
 
         options = $.extend(defaults, options);
@@ -32,7 +32,7 @@
                 if (start == length)
                     break;
 
-                $this.text(text.slice(0, length) + options.char);
+                $this.text(text.slice(0, length) + options['char']);
 
                 if ($this.height () <= targetHeight)
                     start = length;
@@ -40,7 +40,7 @@
                     end = length - 1;
             }
 
-            $this.text(text.slice(0, start) + options.char);
+            $this.text(text.slice(0, start) + options['char']);
         });
 
         return this;
