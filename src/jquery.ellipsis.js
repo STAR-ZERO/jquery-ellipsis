@@ -1,4 +1,4 @@
-(function($) {
+﻿(function($) {
     $.fn.ellipsis = function(options) {
 
         // デフォルトオプション
@@ -17,8 +17,10 @@
 
             // 1行分の高さを取得
             $this.text('a');
+            var lineHeight =  parseFloat($this.css("lineHeight"), 10);
             var rowHeight = $this.height();
-            var targetHeight = rowHeight * options.row;
+            var gapHeight = lineHeight > rowHeight ? (lineHeight - rowHeight) : 0;
+            var targetHeight = gapHeight * (options.row - 1) + rowHeight * options.row;
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
