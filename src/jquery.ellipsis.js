@@ -1,4 +1,4 @@
-(function($) {
+﻿(function($) {
     $.fn.ellipsis = function(options) {
 
         // デフォルトオプション
