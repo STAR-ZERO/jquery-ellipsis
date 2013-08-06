@@ -1,21 +1,21 @@
 ﻿(function($) {
     $.fn.ellipsis = function(options) {
 
-        // デフォルトオプション
+        // default option
         var defaults = {
-            'row' : 1, // 省略行数
-            'char' : '...' // 省略文字
+            'row' : 1, // show rows
+            'char' : '...' // ellipsis
         };
 
         options = $.extend(defaults, options);
 
         this.each(function() {
-            // 現在のテキストを取得
+            // get element text
             var $this = $(this);
             var text = $this.text();
             var origHeight = $this.height();
 
-            // 1行分の高さを取得
+            // get height
             $this.text('a');
             var lineHeight =  parseFloat($this.css("lineHeight"), 10);
             var rowHeight = $this.height();
