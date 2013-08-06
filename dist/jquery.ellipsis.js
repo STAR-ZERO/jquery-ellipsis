@@ -1,28 +1,29 @@
-/*! jQuery ellipsis - v1.0.8 - 2013-06-23
+/*! jQuery ellipsis - v1.0.9 - 2013-08-07
 * https://github.com/STAR-ZERO/jquery-ellipsis
 * Copyright (c) 2013 Kenji Abe; Licensed MIT */
-
 (function($) {
     $.fn.ellipsis = function(options) {
 
-        // デフォルトオプション
+        // default option
         var defaults = {
-            'row' : 1, // 省略行数
-            'char' : '...' // 省略文字
+            'row' : 1, // show rows
+            'char' : '...' // ellipsis
         };
 
         options = $.extend(defaults, options);
 
         this.each(function() {
-            // 現在のテキストを取得
+            // get element text
             var $this = $(this);
             var text = $this.text();
             var origHeight = $this.height();
 
-            // 1行分の高さを取得
+            // get height
             $this.text('a');
+            var lineHeight =  parseFloat($this.css("lineHeight"), 10);
             var rowHeight = $this.height();
-            var targetHeight = rowHeight * options.row;
+            var gapHeight = lineHeight > rowHeight ? (lineHeight - rowHeight) : 0;
+            var targetHeight = gapHeight * (options.row - 1) + rowHeight * options.row;
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
