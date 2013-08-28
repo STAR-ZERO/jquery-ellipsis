@@ -4,7 +4,10 @@
         // default option
         var defaults = {
             'row' : 1, // show rows
-            'char' : '...' // ellipsis
+            'char' : '...', // ellipsis
+            'callbck' : function($ellipsed){//callback after ellipsis had been added
+              return function($ellipsed){};
+            }
         };
 
         options = $.extend(defaults, options);
@@ -44,6 +47,7 @@
             }
 
             $this.text(text.slice(0, start) + options['char']);
+            options.callbck($this);
         });
 
         return this;
