@@ -4,6 +4,7 @@
         // default option
         var defaults = {
             'row' : 1, // show rows
+            'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
             'char' : '...' // ellipsis
         };
 
@@ -36,14 +37,20 @@
 
                 $this.text(text.slice(0, length) + options['char']);
 
-                if ($this.height () <= targetHeight) {
+                if ($this.height() <= targetHeight) {
                     start = length;
                 } else {
                     end = length - 1;
                 }
             }
 
-            $this.text(text.slice(0, start) + options['char']);
+            text = text.slice(0, start);
+
+            if (options.onlyFullWords) {
+                text = text.replace(/[\u00AD\w]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
+            }
+
+            $this.text(text + options['char']);
         });
 
         return this;

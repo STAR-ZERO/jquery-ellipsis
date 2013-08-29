@@ -45,4 +45,14 @@
         });
     });
 
+    test('two line ellipsis with full word setting', function() {
+        $('#two-char').ellipsis({
+            row: 2,
+            onlyFullWords: true
+        });
+        var text = $('#two-char').text();
+        equal(text.lastIndexOf(' ...'), text.length - 4);
+        equal($('#two-char').height(), $('#ref-height').height() * 2);
+    });
+
 }(jQuery));
