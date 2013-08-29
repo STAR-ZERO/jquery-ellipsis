@@ -36,6 +36,15 @@ $('#target').ellipsis({
 });
 ```
 
+Only include full words (remove word fragments at the end)
+
+```
+$('#target').ellipsis({
+    row: 2,
+    onlyFullWords: true
+});
+```
+
 ## License
 jquery-ellipsis is available under the terms of the [MIT License](https://github.com/STAR-ZERO/jquery-ellipsis/blob/master/LICENSE-MIT).
 
