@@ -1,4 +1,4 @@
-# jQuery ellipsis [![Build Status](https://travis-ci.org/STAR-ZERO/jquery-ellipsis.png?branch=master)](https://travis-ci.org/STAR-ZERO/jquery-ellipsis)
+# jQuery ellipsis [![Build Status](https://travis-ci.org/STAR-ZERO/jquery-ellipsis.png?branch=master)](https://travis-ci.org/STAR-ZERO/jquery-ellipsis) [![Coverage Status](https://coveralls.io/repos/STAR-ZERO/jquery-ellipsis/badge.png?branch=master)](https://coveralls.io/r/STAR-ZERO/jquery-ellipsis?branch=master)
 
 Support multiple lines ellipsis
 
