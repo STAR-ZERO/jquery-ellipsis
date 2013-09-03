@@ -55,4 +55,12 @@
         equal($('#two-char').height(), $('#ref-height').height() * 2);
     });
 
+    test('call callback function', function() {
+        $('#one').ellipsis({
+            callback: function() {
+                equal(this.id, 'one');
+            }
+        });
+    });
+
 }(jQuery));

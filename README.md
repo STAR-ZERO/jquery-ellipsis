@@ -45,6 +45,16 @@ $('#target').ellipsis({
 });
 ```
 
+Callback function
+
+```
+$('#target').ellipsis({
+    callback: function() {
+        console.log($(this).text());
+    }
+});
+```
+
 ## License
 jquery-ellipsis is available under the terms of the [MIT License](https://github.com/STAR-ZERO/jquery-ellipsis/blob/master/LICENSE-MIT).
 
