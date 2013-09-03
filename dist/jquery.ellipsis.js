@@ -1,4 +1,4 @@
-/*! jQuery ellipsis - v1.0.10 - 2013-08-31
+/*! jQuery ellipsis - v1.0.11 - 2013-09-03
 * https://github.com/STAR-ZERO/jquery-ellipsis
 * Copyright (c) 2013 Kenji Abe; Licensed MIT */
 (function($) {
@@ -8,7 +8,8 @@
         var defaults = {
             'row' : 1, // show rows
             'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
-            'char' : '...' // ellipsis
+            'char' : '...', // ellipsis
+            'callback': function() {}
         };
 
         options = $.extend(defaults, options);
@@ -54,6 +55,8 @@
             }
 
             $this.text(text + options['char']);
+
+            options.callback.call(this);
         });
 
         return this;
