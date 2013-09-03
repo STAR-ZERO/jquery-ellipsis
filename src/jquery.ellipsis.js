@@ -26,6 +26,7 @@
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
+                options.callback.call(this);
                 return;
             }
 

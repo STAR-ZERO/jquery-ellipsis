@@ -55,10 +55,25 @@
         equal($('#two-char').height(), $('#ref-height').height() * 2);
     });
 
+    test('no ellipsis', function() {
+        var expected = $('#no-ellipsis').text();
+        $('#no-ellipsis').ellipsis();
+        var actual = $('#no-ellipsis').text();
+        equal(actual, expected);
+    });
+
     test('call callback function', function() {
         $('#one').ellipsis({
             callback: function() {
                 equal(this.id, 'one');
+            }
+        });
+    });
+
+    test('call callback function', function() {
+        $('#no-ellipsis').ellipsis({
+            callback: function() {
+                equal(this.id, 'no-ellipsis');
             }
         });
     });
