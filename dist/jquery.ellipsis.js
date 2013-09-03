@@ -1,4 +1,4 @@
-/*! jQuery ellipsis - v1.0.11 - 2013-09-03
+/*! jQuery ellipsis - v1.0.12 - 2013-09-03
 * https://github.com/STAR-ZERO/jquery-ellipsis
 * Copyright (c) 2013 Kenji Abe; Licensed MIT */
 (function($) {
@@ -29,6 +29,7 @@
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
+                options.callback.call(this);
                 return;
             }
 
