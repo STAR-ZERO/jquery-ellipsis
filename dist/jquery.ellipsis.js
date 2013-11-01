@@ -1,4 +1,4 @@
-/*! jQuery ellipsis - v1.0.12 - 2013-09-03
+/*! jQuery ellipsis - v1.0.12 - 2013-11-01
 * https://github.com/STAR-ZERO/jquery-ellipsis
 * Copyright (c) 2013 Kenji Abe; Licensed MIT */
 (function($) {
@@ -52,7 +52,7 @@
             text = text.slice(0, start);
 
             if (options.onlyFullWords) {
-                text = text.replace(/[\u00AD\w]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
+                text = text.replace(/[\u00AD\w\uac00-\ud7af]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
             }
 
             $this.text(text + options['char']);

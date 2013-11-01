@@ -49,7 +49,7 @@
             text = text.slice(0, start);
 
             if (options.onlyFullWords) {
-                text = text.replace(/[\u00AD\w]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
+                text = text.replace(/[\u00AD\w\uac00-\ud7af]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
             }
 
             $this.text(text + options['char']);
