@@ -55,6 +55,15 @@ $('#target').ellipsis({
 });
 ```
 
+Ellipsis for middle position
+
+```
+$('#target').ellipsis({
+    position: 'middle'
+});
+```
+```
+
 ## License
 jquery-ellipsis is available under the terms of the [MIT License](https://github.com/STAR-ZERO/jquery-ellipsis/blob/master/LICENSE-MIT).
 
