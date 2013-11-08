@@ -77,5 +77,66 @@
             }
         });
     });
+    
+    test('one line ellipsis for middle position', function() {
+        $('#one').ellipsis({
+            position: 'middle'
+        });
+        var text = $('#one').text();
+        equal(text.lastIndexOf('...'), text.length - 6);
+        equal($('#one').height(), $('#ref-height').height());
+    });
+    
+    test('two line ellipsis for middle position', function() {
+        $('#two').ellipsis({
+            row: 2,
+            position: 'middle'
+        });
+        var text = $('#two').text();
+        equal(text.lastIndexOf('...'), text.length - 7);
+        equal($('#two').height(), $('#ref-height').height() * 2);
+    });
+
+    test('one line ellipsis, change char for middle position', function() {
+        $('#one-char').ellipsis({
+            char: '**',
+            position: 'middle'
+        });
+        var text = $('#one-char').text();
+        equal(text.lastIndexOf('**'), text.length - 6);
+        equal($('#one-char').height(), $('#ref-height').height());
+    });
+
+    test('two line ellipsis, change char for middle position', function() {
+        $('#two-char').ellipsis({
+            row: 2,
+            char: '**',
+            position: 'middle'
+        });
+        var text = $('#two-char').text();
+        equal(text.lastIndexOf('**'), text.length - 6);
+        equal($('#two-char').height(), $('#ref-height').height() * 2);
+    });
+
+    test('mulitple element for middle position', function() {
+        expect(6);
+        $('#multi p').ellipsis({ position: 'middle' });
+        $('#multi p').each(function() {
+            var text = $(this).text();
+            equal(text.lastIndexOf('...'), text.length - 7);
+            equal($(this).height(), $('#ref-height').height());
+        });
+    });
+
+    test('two line ellipsis with full word setting for middle position', function() {
+        $('#two-char').ellipsis({
+            row: 2,
+            onlyFullWords: true,
+            position: 'middle'
+        });
+        var text = $('#two-char').text();
+        equal(text.lastIndexOf(' ...'), text.length - 4);
+        equal($('#two-char').height(), $('#ref-height').height() * 2);
+    });
 
 }(jQuery));

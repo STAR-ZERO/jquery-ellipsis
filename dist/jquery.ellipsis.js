@@ -1,4 +1,4 @@
-/*! jQuery ellipsis - v1.0.13 - 2013-11-01
+/*! jQuery ellipsis - v1.0.13 - 2013-11-08
 * https://github.com/STAR-ZERO/jquery-ellipsis
 * Copyright (c) 2013 Kenji Abe; Licensed MIT */
 (function($) {
@@ -9,15 +9,18 @@
             'row' : 1, // show rows
             'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
             'char' : '...', // ellipsis
-            'callback': function() {}
+            'callback': function() {},
+            'position': 'tail' // middle, tail
         };
 
         options = $.extend(defaults, options);
-
+        
         this.each(function() {
             // get element text
             var $this = $(this);
             var text = $this.text();
+            var origText = text;
+            var origLength = origText.length;
             var origHeight = $this.height();
 
             // get height
@@ -33,30 +36,64 @@
                 return;
             }
 
-            // Binary search for max length
-            var start = 1;
+            var start = 1, length = 0;
             var end = text.length;
-
-            while (start < end) {
-                var length = Math.ceil((start + end) / 2);
-
-                $this.text(text.slice(0, length) + options['char']);
-
-                if ($this.height() <= targetHeight) {
-                    start = length;
-                } else {
-                    end = length - 1;
+            
+            if(options.position === 'tail') {
+                while (start < end) { // Binary search for max length
+                    length = Math.ceil((start + end) / 2);
+    
+                    $this.text(text.slice(0, length) + options['char']);
+    
+                    if ($this.height() <= targetHeight) {
+                        start = length;
+                    } else {
+                        end = length - 1;
+                    }
                 }
+                
+                text = text.slice(0, start);
+                
+                if (options.onlyFullWords) {
+                    text = text.replace(/[\u00AD\w\uac00-\ud7af]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
+                }
+                text += options['char'];
+                
+            }else if(options.position === 'middle') {
+
+                var sliceLength = 0;
+                while (start < end) { // Binary search for max length
+                    length = Math.ceil((start + end) / 2);
+                    sliceLength = Math.max(origLength - length, 0);
+                    
+                    $this.text(
+                        origText.slice(0, Math.floor((origLength - sliceLength) / 2)) + 
+                               options['char'] + 
+                               origText.slice(Math.floor((origLength + sliceLength) / 2), origLength)
+                    );
+    
+                    if ($this.height() <= targetHeight) {
+                        start = length;
+                    } else {
+                        end = length - 1;
+                    }
+                }
+                
+                sliceLength = Math.max(origLength - start, 0);
+                var head = origText.slice(0, Math.floor((origLength - sliceLength) / 2));
+                var tail = origText.slice(Math.floor((origLength + sliceLength) / 2), origLength);
+                
+                if (options.onlyFullWords) {
+                    // remove fragment of the last or first word together with possible soft-hyphen characters
+                    head = head.replace(/[\u00AD\w\uac00-\ud7af]+$/, '');
+                    tail = tail.replace(/^[\u00AD\w\uac00-\ud7af]+/, '');
+                }
+                
+                text = head + options['char'] + tail;  
             }
-
-            text = text.slice(0, start);
-
-            if (options.onlyFullWords) {
-                text = text.replace(/[\u00AD\w\uac00-\ud7af]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
-            }
-
-            $this.text(text + options['char']);
-
+            
+            $this.text(text);
+            
             options.callback.call(this);
         });
 
