@@ -1,4 +1,4 @@
-/*! jQuery ellipsis - v1.0.13 - 2013-11-26
+/*! jQuery ellipsis - v1.1.0 - 2013-11-26
 * https://github.com/STAR-ZERO/jquery-ellipsis
 * Copyright (c) 2013 Kenji Abe; Licensed MIT */
 (function($) {
