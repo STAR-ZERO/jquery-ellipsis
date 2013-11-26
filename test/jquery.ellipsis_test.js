@@ -135,7 +135,7 @@
             position: 'middle'
         });
         var text = $('#two-char').text();
-        equal(text.lastIndexOf(' ...'), text.length - 4);
+        equal(text.lastIndexOf(' ...'), text.length - 8);
         equal($('#two-char').height(), $('#ref-height').height() * 2);
     });
 

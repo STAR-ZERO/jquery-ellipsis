@@ -79,11 +79,10 @@
                 sliceLength = Math.max(origLength - start, 0);
                 var head = origText.slice(0, Math.floor((origLength - sliceLength) / 2));
                 var tail = origText.slice(Math.floor((origLength + sliceLength) / 2), origLength);
-                
+
                 if (options.onlyFullWords) {
                     // remove fragment of the last or first word together with possible soft-hyphen characters
                     head = head.replace(/[\u00AD\w\uac00-\ud7af]+$/, '');
-                    tail = tail.replace(/^[\u00AD\w\uac00-\ud7af]+/, '');
                 }
                 
                 text = head + options['char'] + tail;  
