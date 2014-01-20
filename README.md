@@ -63,11 +63,11 @@ $('#target').ellipsis({
 });
 ```
 
-Ellipsis for middle position
+Ellipsis for tail position
 
 ```
 $('#target').ellipsis({
-    position: 'middle'
+    position: 'tail'
 });
 ```
 
