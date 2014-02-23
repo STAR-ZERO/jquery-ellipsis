@@ -1,0 +1,31 @@
+{
+  "name": "jquery-ellipsis",
+  "version": "1.1.0",
+  "homepage": "https://github.com/STAR-ZERO/jquery-ellipsis",
+  "authors": [
+    "Kenji Abe <kenji.01.star@gmail.com>"
+  ],
+  "description": "Support multiple lines ellipsis",
+  "main": "dist/jquery.ellipsis.min.js",
+  "keywords": [
+    "jquery",
+    "ellipsis"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test",
+    "tests",
+    "**/.md",
+    "Gruntfile.js",
+    "LICENSE-MIT",
+    "ellipsis.jquery.json",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  }
+}
