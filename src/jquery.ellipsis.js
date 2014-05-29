@@ -6,6 +6,7 @@
             'row' : 1, // show rows
             'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
             'char' : '...', // ellipsis
+            'htmlChar' : false, // ellipsis
             'callback': function() {},
             'position': 'tail' // middle, tail
         };
@@ -17,21 +18,41 @@
             var $this = $(this);
             var text = $this.text();
             var origText = text;
+
             var origLength = origText.length;
             var origHeight = $this.height();
+
 
             // get height
             $this.text('a');
             var lineHeight =  parseFloat($this.css("lineHeight"), 10);
             var rowHeight = $this.height();
+
             var gapHeight = lineHeight > rowHeight ? (lineHeight - rowHeight) : 0;
             var targetHeight = gapHeight * (options.row - 1) + rowHeight * options.row;
+
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
                 options.callback.call(this);
                 return;
             }
+
+            var char;
+            char = options['char'];
+            if (typeof(char) == "function") {
+                char = char($this);
+            }
+
+            if (options['htmlChar']){
+//                debugger;
+                var htmlRowHeight = $this.text('').append(char).height();
+                var htmlLineHeight =  parseFloat($this.css("lineHeight"), 10);
+                var htmlGapHeight = htmlLineHeight > htmlRowHeight ? (htmlLineHeight - htmlRowHeight) : 0;
+                var perLineTextHeight = gapHeight + rowHeight;
+                targetHeight = targetHeight - perLineTextHeight + htmlGapHeight + htmlRowHeight;
+            }
+
 
             var start = 1, length = 0;
             var end = text.length;
@@ -40,7 +61,13 @@
                 while (start < end) { // Binary search for max length
                     length = Math.ceil((start + end) / 2);
 
-                    $this.text(text.slice(0, length) + options['char']);
+                    if (options['htmlChar']){
+                        $this.text(text.slice(0, length));
+                        $this.append(char);
+                    }
+                    else{
+                        $this.text(text.slice(0, length) + char);
+                    }
 
                     if ($this.height() <= targetHeight) {
                         start = length;
@@ -54,7 +81,10 @@
                 if (options.onlyFullWords) {
                     text = text.replace(/[\u00AD\w\uac00-\ud7af]+$/, ''); // remove fragment of the last word together with possible soft-hyphen characters
                 }
-                text += options['char'];
+                if (!options['htmlChar']){
+                    text += char;
+                }
+
 
             }else if(options.position === 'middle') {
 
@@ -65,7 +95,7 @@
 
                     $this.text(
                         origText.slice(0, Math.floor((origLength - sliceLength) / 2)) +
-                               options['char'] +
+                            char +
                                origText.slice(Math.floor((origLength + sliceLength) / 2), origLength)
                     );
 
@@ -85,10 +115,13 @@
                     head = head.replace(/[\u00AD\w\uac00-\ud7af]+$/, '');
                 }
 
-                text = head + options['char'] + tail;
+                text = head + char + tail;
             }
 
             $this.text(text);
+            if (options['htmlChar']){
+                $this.append(char);
+            }
 
             options.callback.call(this);
         });
