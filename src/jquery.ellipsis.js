@@ -6,7 +6,7 @@
             'row' : 1, // show rows
             'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
             'char' : '...', // ellipsis
-            'callback': function(_elem,_originalText) {},
+            'callback': function(_originalText) {},
             'position': 'tail', // middle, tail
             'ellipted': 'ellipted' // a class which will be added when the element has been elliped
         };
