@@ -6,8 +6,9 @@
             'row' : 1, // show rows
             'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
             'char' : '...', // ellipsis
-            'callback': function() {},
-            'position': 'tail' // middle, tail
+            'callback': function(_elem,_originalText) {},
+            'position': 'tail', // middle, tail
+            'ellipted': 'ellipted' // a class which will be added when the element has been elliped
         };
 
         options = $.extend(defaults, options);
@@ -29,7 +30,7 @@
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
-                options.callback.call(this);
+                options.callback.call(this,origText);
                 return;
             }
 
@@ -88,9 +89,9 @@
                 text = head + options['char'] + tail;
             }
 
-            $this.text(text);
+            $this.text(text).addClass(options.ellipted);
 
-            options.callback.call(this);
+            options.callback.call(this,origText);
         });
 
         return this;
