@@ -16,7 +16,8 @@
         this.each(function() {
             // get element text
             var $this = $(this);
-            var text = $this.text();
+            var text = $(this).attr('data-originalText') || $this.text();
+            $this.text(text);
             var origText = text;
             var origLength = origText.length;
             var origHeight = $this.height();
@@ -89,7 +90,7 @@
                 text = head + options['char'] + tail;
             }
 
-            $this.text(text).addClass(options.ellipted);
+            $this.text(text).addClass(options.ellipted).attr('data-originalText',origText);
 
             options.callback.call(this,origText);
         });
