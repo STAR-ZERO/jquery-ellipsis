@@ -58,6 +58,17 @@ $('#target').ellipsis({
 });
 ```
 
+Html Ellipse using Callback
+```
+$(#targe').ellipsis({
+    row: 4,
+    onlyFullWords: true,
+    htmlChar: true,
+    char: function(currentElement){
+        return ' <a href=\"' + currentElement.data('more-link') + '\">more ...</a>';
+    }
+})
+```
 Ellipsis for middle position
 
 ```
