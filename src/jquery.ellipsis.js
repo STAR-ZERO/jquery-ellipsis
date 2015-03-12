@@ -6,8 +6,9 @@
             'row' : 1, // show rows
             'onlyFullWords': false, // set to true to avoid cutting the text in the middle of a word
             'char' : '...', // ellipsis
-            'callback': function() {},
-            'position': 'tail' // middle, tail
+            'callback': function(_originalText) {},
+            'position': 'tail', // middle, tail
+            'ellipted': 'ellipted' // a class which will be added when the element has been elliped
         };
 
         options = $.extend(defaults, options);
@@ -15,7 +16,8 @@
         this.each(function() {
             // get element text
             var $this = $(this);
-            var text = $this.text();
+            var text = $(this).attr('data-originalText') || $this.text();
+            $this.text(text);
             var origText = text;
             var origLength = origText.length;
             var origHeight = $this.height();
@@ -29,7 +31,7 @@
 
             if (origHeight <= targetHeight) {
                 $this.text(text);
-                options.callback.call(this);
+                options.callback.call(this,origText);
                 return;
             }
 
@@ -88,9 +90,9 @@
                 text = head + options['char'] + tail;
             }
 
-            $this.text(text);
+            $this.text(text).addClass(options.ellipted).attr('data-originalText',origText);
 
-            options.callback.call(this);
+            options.callback.call(this,origText);
         });
 
         return this;
